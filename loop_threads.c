@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <stdlib.h>
-
-
 /* **************************** LOOP THREADS ******************************
 ** If you put into the same loop the thread_create and the thread_join, so 
 ** you will have one thread runing after other, in a row. But when we wotk
@@ -12,6 +6,10 @@
 ** we will creat all the threads, leave them work and than finish the threads.
 */
 
+#include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <stdlib.h>
 
 enum error
 {

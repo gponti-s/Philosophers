@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <stdlib.h>
-
 
 /* **************************** The Race Condition ******************************
 ** The problem happens when you have threads handling the same variable at the 
@@ -14,6 +9,10 @@
 ** Mutex works like a padlock, to allow all threads to work simultaneously.
 */
 
+#include <stdio.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <stdlib.h>
 
 enum error
 {

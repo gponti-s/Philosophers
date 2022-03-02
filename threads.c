@@ -1,3 +1,11 @@
+/* ************** The difference between Threads and Process *****************
+** 1 - Processes are run by different processes with different ids, 
+**      while Threads run in a single process;
+** 2 -  Each process handles each variable autonomously (changing one 
+**      variable does not change it for all processes), whereas Treads share 
+**      the same variable values.
+*/
+
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
@@ -38,11 +46,3 @@ int main(int argc, char **argv)
     printf("%d\n", resp);
     return (resp);
 }
-
-/* ************** The difference between Threads and Process *****************
-** 1 - Processes are run by different processes with different ids, 
-**      while Threads run in a single process;
-** 2 -  Each process handles each variable autonomously (changing one 
-**      variable does not change it for all processes), whereas Treads share 
-**      the same variable values.
-*/
