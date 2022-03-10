@@ -6,11 +6,11 @@
 /*   By: gponti-s <gponti-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 18:32:32 by gponti-s          #+#    #+#             */
-/*   Updated: 2022/03/04 19:34:41 by gponti-s         ###   ########.fr       */
+/*   Updated: 2022/03/08 17:22:36 by gponti-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#import "philosophers.h"
+#include "philosophers.h"
 
 unsigned int	get_time(void)
 {
@@ -59,4 +59,18 @@ void	ft_sleep(unsigned int delay)
 		usleep(delay / 10);
 }
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s != 0)
+		write(fd, s, ft_strlen(s));
+}
 
+int ft_strlen(char *ptr)
+{
+	int len;
+
+	len = 0;
+	while (ptr[len])
+		len++;
+	return (len);
+}

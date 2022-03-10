@@ -1,33 +1,43 @@
-MAKEFLAGS += --quiet
-SRC	= $(shell find src -type f -name "*.c")
-LIB = $(shell find libft -type f -name "*.a")
-INCLUDE	= $(addprefix -I, include)
-OBJS	=$(SRC:.c=.o)
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-NAME = philosophers
+CC			= gcc -g -Wall -Wextra -Werror -pthread -fsanitize=address
+RM			= rm -rf
+NAME		= ./philo
+NAME_SHORT	= philo
 
-all: libft $(NAME)
+INCS_DIR	= include
+MAIN_INC	= -I$(INCS_DIR)
+INCS		= $(shell find $(INCS_DIR) -type f -name "*.h")
 
-libft:
-	@$(MAKE) -C libft/
+SRCS_DIR 	= src
+SRCS		= $(shell find $(SRCS_DIR) -type f -name "*.c")
 
-$(NAME):	libft $(OBJS)
-	@$(CC) -o $(NAME) $(CFLAGS) $(INCLUDE) $(LIB) $(OBJS)
+OBJS		= $(SRCS:.c=.o)
 
-.c.o:
-	@echo "Creating object: $@"
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+CLEAR		= \033[0K\r\c
+OK			= [\033[32mOK\033[0m]
+RED			= \033[1;31m
+OFF			= \033[0m
 
-clean:
-	@rm -f $(OBJS)
-	@$(MAKE) -C libft/ clean
+%.o			: %.c
+			@echo "[..] $(NAME_SHORT)... compiling $*.c\r\c"
+			@$(CC) $(MAIN_INC) -c $< -o $@
+			@echo "$(CLEAR)"
 
-fclean:
-	@$(MAKE) -C libft/ fclean
-	@rm -f $(OBJS)
-	@rm -f $(NAME)
+all			: $(NAME)
 
-re:			fclean all
+$(NAME)		: $(OBJS) $(INCS)
+			@$(CC) $(OBJS) $(MAIN_INC) -o $(NAME)
+			@echo "$(OK) $(NAME_SHORT) compiled"
 
-.PHONY:		all clean fclean re libft $(NAME)
+clean		:
+			@$(RM) $(OBJS)
+			@echo "${RED}...Removing object files...${OFF}"
+
+fclean		: clean
+			@$(RM) $(NAME)
+
+re			: fclean all
+
+norme		:
+			@norminette $(SRCS) $(INCS)
+
+.PHONY		: all clean fclean re norme

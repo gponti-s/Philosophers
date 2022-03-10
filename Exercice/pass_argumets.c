@@ -1,13 +1,13 @@
 /* ************* Pass Arguments Problems ****************
-** To pass arguments to a thread we use the pthread_create, 
-** in the fouth position, which means that the argument will
-** fill the paramenters requested by the function in the 
-** second position.
-** The problem is that when dealing with pointers, we must 
-** not pass the same address to be used by all threads at the 
-** same time. We need to create a specific space in memory 
-** that each thread will interact with. To do this we need
-** to use dynamic allocation - malloc.
+** To pass arguments to a thread we use the pthread_create, in the fouth position, 
+** which means that the argument will fill the paramenters requested by the function 
+** in the second position.
+** The problem is that when dealing with pointers, we must not pass the same address 
+** to be used by all threads at the same time. We need to create a specific space 
+** in memory that each thread will interact with. To do this we need to use dynamic 
+** allocation - malloc.
+** Sintaxy:
+** int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
 */
 
 
@@ -21,7 +21,8 @@ int primes[10] = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29};
 void    *routine(void *arg)
 {
     int index = *(int *)arg;
-    printf("%d\n", primes[index]);
+    printf("Primes: %d\n", primes[index]);
+    printf("Index: %d\n",index);
     free(arg);
 }
 
@@ -40,7 +41,6 @@ int main(int argc, char **argv)
     {
         if (pthread_join(th[i], NULL) != 0)
             perror("Failed to join thread");
-    }
-     
+    }  
     return 0;
 }

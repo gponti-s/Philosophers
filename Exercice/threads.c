@@ -1,9 +1,11 @@
 /* ************** The difference between Threads and Process *****************
 ** 1 - Processes are run by different processes with different ids, 
-**      while Threads run in a single process;
-** 2 -  Each process handles each variable autonomously (changing one 
-**      variable does not change it for all processes), whereas Treads share 
-**      the same variable values.
+**     while Threads run in a single process;
+** 2 - Each process handles each variable autonomously (changing one 
+**     variable does not change it for all processes), whereas Treads share 
+**     the same variable values.
+** Syntax:
+** int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
 */
 
 #include <stdio.h>

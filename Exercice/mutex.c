@@ -30,6 +30,7 @@ void *routine()
 {
     for (int i = 0; i < 100000; i++)
     {
+        printf("mails: %d", mails);
         pthread_mutex_lock(&mutex);
         mails++;
         pthread_mutex_unlock(&mutex);
