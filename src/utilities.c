@@ -6,7 +6,7 @@
 /*   By: gponti-s <gponti-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 18:32:32 by gponti-s          #+#    #+#             */
-/*   Updated: 2022/03/08 17:22:36 by gponti-s         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:50:07 by gponti-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, s, ft_strlen(s));
 }
 
-int ft_strlen(char *ptr)
+int	ft_strlen(char *ptr)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (ptr[len])

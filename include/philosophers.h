@@ -6,12 +6,12 @@
 /*   By: gponti-s <gponti-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:17:19 by gponti-s          #+#    #+#             */
-/*   Updated: 2022/03/10 15:29:14 by gponti-s         ###   ########.fr       */
+/*   Updated: 2022/03/11 18:55:14 by gponti-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PHILOSOPHER_H
-# define	PHILOSOPHER_H
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
 # include <stdio.h>
 # include <string.h>
@@ -19,6 +19,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
+
+# define INT_MAX 2147483647
 
 typedef enum e_prog_state
 {
@@ -66,10 +68,6 @@ void			clean_free(t_info *ptr_info);
 
 // inicializer.c
 void			initializer(t_info *general, int argc, char const **argv, e_prog_state prog_state);
-// char 			init_args(t_info *general, int argc, char const **argv);
-// char			set_info(size_t *ptr_info, int ref, char const **argv);
-// char			init_philosophers(t_info *ptr_info);
-// char			init_mutex(t_info *ptr_info);
 
 // utilities.c
 unsigned int	get_time(void);
@@ -81,11 +79,6 @@ int 			ft_strlen(char *ptr);
 // routine.c
 void			philo(t_info *ptr_info, e_prog_state e_prog_state);
 void			*routine_philo(void *p);
-
-// activities.c
-// void			another_fork(t_philosophers *p);
-// void			philo_fork(t_philosophers *p);
-// void			philo_eat(t_philosophers *p);
 
 // death.c
 void			*ft_die(void *philo);
