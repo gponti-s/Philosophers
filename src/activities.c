@@ -6,11 +6,13 @@
 /*   By: gponti-s <gponti-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:14:26 by gponti-s          #+#    #+#             */
-/*   Updated: 2022/03/11 18:51:42 by gponti-s         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:31:42 by gponti-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+/* This function make a philosopher take the forks */
 
 static void	philo_fork(t_philosophers *p)
 {
@@ -31,6 +33,8 @@ static void	philo_fork(t_philosophers *p)
 		- p->info->init_time, p->philosophers_id + 1);
 	pthread_mutex_unlock(&(p->info->forks[p->philosophers_id]));
 }
+
+/* This function will add information about eating (start eat time) and check how many times philosophers ate */
 
 static void	philo_eat(t_philosophers *p)
 {
@@ -60,6 +64,8 @@ static void	philo_eat(t_philosophers *p)
 	ft_sleep(p->info->time_to_eat);
 }
 
+/* This function releases the forks and starts sleep time */
+
 static void	another_fork(t_philosophers *p)
 {
 	pthread_mutex_unlock(&(p->info->forks[p->philosophers_id]));
@@ -70,6 +76,8 @@ static void	another_fork(t_philosophers *p)
 		- p->info->init_time, p->philosophers_id + 1);
 	ft_sleep(p->info->time_to_sleep);
 }
+
+/* This function guarantees that philosophers will do the routine alternatively */
 
 void	*routine_philo(void *ptr)
 {

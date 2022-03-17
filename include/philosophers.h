@@ -6,7 +6,7 @@
 /*   By: gponti-s <gponti-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 16:17:19 by gponti-s          #+#    #+#             */
-/*   Updated: 2022/03/11 18:55:14 by gponti-s         ###   ########.fr       */
+/*   Updated: 2022/03/17 18:57:51 by gponti-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef	struct	s_philosophers
 
 typedef struct s_info
 {
-	pthread_t			death;
+	pthread_t			death;	
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		die;
 	pthread_mutex_t		locked;
