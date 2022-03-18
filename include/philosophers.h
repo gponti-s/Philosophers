@@ -22,6 +22,15 @@
 
 # define INT_MAX 2147483647
 
+typedef enum e_message
+{
+	FORK,
+	EATING,
+	SLEEPING,
+	THINKING,
+	DIE,
+} e_message;
+
 typedef enum e_prog_state
 {
 	STATE_OK,
@@ -50,6 +59,7 @@ typedef struct s_info
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		die;
 	pthread_mutex_t		locked;
+	pthread_mutex_t		print;
 	t_philosophers		*philosophers;
 	size_t				number_of_philosophers;
 	size_t				philosopher_eat;
@@ -79,7 +89,7 @@ int 			ft_strlen(char *ptr);
 // routine.c
 void			philo(t_info *ptr_info, e_prog_state e_prog_state);
 void			*routine_philo(void *p);
-
+void			print_routine(t_philosophers *p, e_message message);
 // death.c
 void			*ft_die(void *philo);
 

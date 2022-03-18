@@ -14,6 +14,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 
+
 enum error
 {
     STATE_OK,
@@ -26,16 +27,25 @@ enum error
 int mails = 0;
 pthread_mutex_t mutex;
 
+void test()
+{
+    printf("entrei\n");
+    //pthread_mutex_unlock(&mutex);
+}
+
 void *routine()
 {
-    for (int i = 0; i < 100000; i++)
+    for (int i = 0; i < 10; i++)
     {
-        printf("mails: %d", mails);
+        printf("mails: %d\n", mails);
         pthread_mutex_lock(&mutex);
         mails++;
         pthread_mutex_unlock(&mutex);
+        test();
     }
 }
+
+
 
 int main(int argc, char **argv)
 {

@@ -20,8 +20,7 @@ static void	philo_fork(t_philosophers *p)
 
 	f = (p->philosophers_id + 1) % p->info->number_of_philosophers;
 	pthread_mutex_lock(&(p->info->forks[p->philosophers_id]));
-	printf("[%ld] Philosopher %lu has taken a fork\n", get_time()
-		- p->info->init_time, p->philosophers_id + 1);
+	print_routine(p, FORK);
 	if (p->info->number_of_philosophers == 1)
 	{
 		ft_sleep(p->info->time_to_eat);
@@ -29,8 +28,7 @@ static void	philo_fork(t_philosophers *p)
 		pthread_exit(0);
 	}
 	pthread_mutex_lock(&(p->info->forks[f]));
-	printf("[%ld] Philosopher %lu has taken a fork\n", get_time()
-		- p->info->init_time, p->philosophers_id + 1);
+	print_routine(p, FORK);
 	pthread_mutex_unlock(&(p->info->forks[p->philosophers_id]));
 }
 
@@ -38,8 +36,7 @@ static void	philo_fork(t_philosophers *p)
 
 static void	philo_eat(t_philosophers *p)
 {
-	printf("[%ld] Philosopher %lu is eating\n", get_time()
-		- p->info->init_time, p->philosophers_id + 1);
+	print_routine(p, EATING);
 	p->ate = 1;
 	p->last_eat = get_time();
 	(p->eat_count)++;
@@ -72,8 +69,7 @@ static void	another_fork(t_philosophers *p)
 	pthread_mutex_unlock(&(p->info->forks[(p->philosophers_id + 1)
 			% p->info->number_of_philosophers]));
 	p->ate = 0;
-	printf("[%ld] Philosopher %lu is sleeping\n", get_time()
-		- p->info->init_time, p->philosophers_id + 1);
+	print_routine(p, SLEEPING);
 	ft_sleep(p->info->time_to_sleep);
 }
 
@@ -85,14 +81,16 @@ void	*routine_philo(void *ptr)
 
 	philo = (t_philosophers *)ptr;
 	if (philo->philosophers_id % 2)
+	{
+		print_routine(philo, THINKING);
 		ft_sleep(philo->info->time_to_eat);
+	}
 	while (1)
 	{
 		philo_fork(philo);
 		philo_eat(philo);
 		another_fork(philo);
-		printf("[%ld] Philosopher %lu is thinking\n", get_time()
-			- philo->info->init_time, philo->philosophers_id + 1);
+		print_routine(philo, THINKING);
 		if (philo->info->some_died)
 			pthread_exit(0);
 	}

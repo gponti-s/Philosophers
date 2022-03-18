@@ -12,12 +12,6 @@
 
 #include "philosophers.h"
 
-static void	msg_die(t_philosophers *p)
-{
-	printf("[%ld] Philosopher  %lu died\n", get_time()
-		- p->info->init_time, p->philosophers_id + 1);
-}
-
 static void	time_die(t_info *p, size_t *count)
 {
 	pthread_mutex_lock(&(p->locked));
@@ -26,7 +20,7 @@ static void	time_die(t_info *p, size_t *count)
 		&& (get_time() - p->philosophers[*count].last_eat) >= p->time_to_die)
 	{
 		pthread_mutex_unlock(&(p->die));
-		msg_die(p->philosophers);
+		print_routine(p->philosophers, DIE);
 		if (p->time_to_die)
 			exit(EXIT_SUCCESS);
 		p->some_died = 1;

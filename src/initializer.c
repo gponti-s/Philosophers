@@ -85,6 +85,8 @@ static char	init_mutex(t_info *p)
 {
 	size_t	count;
 
+	if (pthread_mutex_init(&(p->print), NULL))
+		return (MUTEX_INICIALIZER_FAIL);
 	if (pthread_mutex_init(&(p->locked), NULL))
 		return (MUTEX_INICIALIZER_FAIL);
 	if (pthread_mutex_init(&(p->die), NULL))

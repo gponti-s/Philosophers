@@ -33,3 +33,27 @@ void	philo(t_info *p, e_prog_state prog_state)
 	if (prog_state != STATE_OK)
 		printer(prog_state, p);
 }
+
+void print_routine(t_philosophers *p, e_message message)
+{
+	pthread_mutex_lock(&(p->info->print));
+	if (message == FORK && p->info->some_died == 0)
+		printf("[%ld] Philosopher %lu has taken a fork\n", get_time()
+		- p->info->init_time, p->philosophers_id + 1);
+	else if (message == EATING && p->info->some_died == 0)
+		printf("[%ld] Philosopher %lu is eating\n", get_time()
+		- p->info->init_time, p->philosophers_id + 1);
+	else if (message == SLEEPING && p->info->some_died == 0)
+		printf("[%ld] Philosopher %lu is sleeping\n", get_time()
+		- p->info->init_time, p->philosophers_id + 1);
+	else if (message == THINKING && p->info->some_died == 0)
+		printf("[%ld] Philosopher %lu is thinking\n", get_time()
+		- p->info->init_time, p->philosophers_id + 1);
+	else if(message == DIE)
+	{
+		printf("[%ld] Philosopher %lu died\n", get_time()
+		- p->info->init_time, p->philosophers_id + 1);
+		p->info->some_died = 1;
+	}
+	pthread_mutex_unlock(&(p->info->print));
+}
